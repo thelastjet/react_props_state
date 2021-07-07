@@ -22,6 +22,7 @@ class App extends Component {
     };
     // bind methods to this
     this.handleBoxClick = this.handleBoxClick.bind(this);
+    this.handleRandomize = this.handleRandomize.bind(this);
   }
 
   handleBoxClick (e) {
@@ -32,14 +33,20 @@ class App extends Component {
       return box;
     });
     
-    this.setState({
-    boxes: newBoxes,
-    });      
+    this.setState({ boxes: newBoxes });      
   }
 
   getRandomColor() {
     const rgb = Math.round(Math.random() * 255);
     return rgb;
+  }
+
+  handleRandomize () {
+    const newBoxes = this.state.boxes.map((box) => {
+      box.color = `rgb(${this.getRandomColor()}, ${this.getRandomColor()}, ${this.getRandomColor()})`
+      return box;
+    });
+    this.setState({ boxes: newBoxes })
   }
 
   render() {
@@ -61,6 +68,7 @@ class App extends Component {
         }}
       >
         <h1>React: State and Props</h1>
+        <button onClick={this.handleRandomize}>Randomize</button>
         <div className="App">{renderBoxes}</div>
       </main>
     );
