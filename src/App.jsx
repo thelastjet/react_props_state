@@ -21,6 +21,7 @@ class App extends Component {
       boxes
     };
     // bind methods to this
+    this.handleBoxClick = this.handleBoxClick.bind(this);
   }
 
   handleBoxClick (e) {
@@ -29,7 +30,11 @@ class App extends Component {
         box.color = `rgb(${this.getRandomColor()}, ${this.getRandomColor()}, ${this.getRandomColor()})`
       }
       return box;
-    })
+    });
+    
+    this.setState({
+    boxes: newBoxes,
+    });      
   }
 
   getRandomColor() {
